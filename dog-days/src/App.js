@@ -1,30 +1,54 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Calendar from 'react-calendar'
 import styled from 'styled-components';
 import moment from 'moment';
 
 export default function App() {
+  const [dog, setDog] = useState() 
   const [dateState, setDateState] = useState(new Date())
   const changeDate = (e) => {
     setDateState(e)
   }
+
+  document.body.style.background = "#475AFF";
+
+  useEffect(() => {
+    fetch("https://dog.ceo/api/breeds/image/random")
+    .then(res => res.json())
+    .then(result => {
+      setDog(result.message)
+    })
+    .catch(err=>console.log(err))
+  }, [dateState]
+  ) 
+
+  console.log(dog)
+
   return (
+    <>
+    <Img src={dog}></Img>
     <CalendarContainer>
       <Calendar
       value={dateState}
       onChange={changeDate}
       />
-      <p>Selected date is <b>{moment(dateState).format('MMMM Do YYYY')}</b></p>
+      <p>Selected date is {moment(dateState).format('MMMM Do YYYY')}</p>
     </CalendarContainer>
+    </>
   )
 }
+const Img = styled.img`
+width: 30vw;
+height: 40vh;
+margin: 20px 0 0 500px;
+border-radius: 10px;
+`
 
 const CalendarContainer = styled.div` 
 max-width: 500px;
 margin: auto;
-margin-top: 300px;
-background: rgb(85,142,242);
-background: linear-gradient(90deg, rgba(85,142,242,1) 13%, rgba(16,247,188,1) 51%, rgba(85,142,242,1) 87%);
+margin-top: 20px;
+background-color: #0017E8;
 padding: 30px 50px 20px 50px;
 border-radius: 10px;
 
@@ -32,7 +56,7 @@ border-radius: 10px;
   display: flex;
 
   .react-calendar__navigation__label {
-    font-weight: bold;
+    font-weight: bolder;
   }
 
     .react-calendar__navigation__arrow {
@@ -45,9 +69,14 @@ border-radius: 10px;
   color: #F9F3F0;
 }
 
+p {
+  color: #F9F3F0;
+  margin-left: 3px;
+}
+
 button {
   margin: 3px;
-  background-color: #6f876f;
+  background-color: #475AFF;
   border: 0;
   border-radius: 3px;
   color: white;
@@ -73,10 +102,10 @@ button {
 }
 
 .react-calendar__month-view__days__day--neighboringMonth {
-  opacity: 0.7;
+  opacity: 0.5;
 }
 .react-calendar__month-view__days__day--weekend {
-  color: #dfdfdf;
+  color: #e4717a;
 }
 
 .react-calendar__tile--range {
