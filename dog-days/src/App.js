@@ -28,7 +28,7 @@ export default function App() {
     <>
     <Img src={dog}></Img>
     <CalendarContainer>
-      <Calendar
+      <Calendar calendarType="US"
       value={dateState}
       onChange={changeDate}
       />
@@ -39,15 +39,23 @@ export default function App() {
 }
 const Img = styled.img`
 width: 30vw;
+min-widht: 30vw;
 height: 40vh;
-margin: 20px 0 0 500px;
+min-height: 30vh;
+margin: 20px 0 0 35%;
 border-radius: 10px;
-`
+
+@media (max-width: 900px) {
+      width: 60vw;
+      height: 40vh;
+      margin: 20px 0 4% 20%;
+  }
+`;
 
 const CalendarContainer = styled.div` 
 max-width: 500px;
 margin: auto;
-margin-top: 20px;
+margin-top: 2%;
 background-color: #0017E8;
 padding: 30px 50px 20px 50px;
 border-radius: 10px;
