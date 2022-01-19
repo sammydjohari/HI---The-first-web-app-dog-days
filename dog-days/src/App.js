@@ -10,19 +10,21 @@ export default function App() {
     setDateState(e)
   }
 
-  document.body.style.background = "#475AFF";
+  document.body.style.background = "#DCCAAC";
 
-  useEffect(() => {
+  function fetchDogs() {
     fetch("https://dog.ceo/api/breeds/image/random")
     .then(res => res.json())
     .then(result => {
       setDog(result.message)
     })
     .catch(err=>console.log(err))
+  }
+
+  useEffect(() => {
+    fetchDogs();
   }, [dateState]
   ) 
-
-  console.log(dog)
 
   return (
     <>
@@ -37,6 +39,7 @@ export default function App() {
     </>
   )
 }
+
 const Img = styled.img`
 width: 30vw;
 min-widht: 30vw;
@@ -56,7 +59,7 @@ const CalendarContainer = styled.div`
 max-width: 500px;
 margin: auto;
 margin-top: 2%;
-background-color: #0017E8;
+background-color: #9D5F38;
 padding: 30px 50px 20px 50px;
 border-radius: 10px;
 
@@ -84,19 +87,19 @@ p {
 
 button {
   margin: 3px;
-  background-color: #475AFF;
+  background-color: #673751;
   border: 0;
   border-radius: 3px;
   color: white;
   padding: 5px 0;
 
   &:hover {
-    background-color: #556b55;
+    background-color: #866F61;
     cursor: pointer;
   }
 
   &:active {
-    background-color: #a5c1a5;
+    background-color: #9D8342;
   }
 }
 
